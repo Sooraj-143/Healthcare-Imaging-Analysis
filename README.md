@@ -1,83 +1,91 @@
-Background Replacement with MediaPipe
-=====================================
+Healthcare Imaging Analysis – Brain Anomaly & Hand Fracture Detection
+=====================================================================
 
-This Python project utilizes **MediaPipe Selfie Segmentation** to perform background replacement in images. The script removes the background from a person image and replaces it with a new background image.
+This Python project provides a tool for detecting anomalies in **brain X-rays** and **hand fractures** in **hand X-rays** using OpenCV for image processing. The script detects possible anomalies or fractures by analyzing contour-based features in X-ray images.
+
+Features
+--------
+
+*   **Brain Anomaly Detection**: Detects and highlights possible anomalies (e.g., tumors, irregularities) in brain X-ray images.
+    
+*   **Hand Fracture Detection**: Identifies potential fractures in hand X-ray images by analyzing edge contours.
+    
 
 Requirements
 ------------
 
-Make sure to have the following Python libraries installed:
+Before running the script, make sure to install the necessary Python libraries:
 
-*   opencv-python for image processing.
-    
-*   mediapipe for segmentation.
-    
-*   numpy for array manipulations.
-    
-
-You can install the required dependencies using pip:
-
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   bashCopy codepip install opencv-python mediapipe numpy   `
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   bashCopy codepip install opencv-python numpy   `
 
 How it Works
 ------------
 
-1.  **Load the images**:
+### 1\. **Brain Anomaly Detection**
+
+*   The brain X-ray image is loaded and processed using a Gaussian Blur and thresholding to identify potential anomalies.
     
-    *   A person image (person.jpeg) is loaded.
-        
-    *   A background image (background.jpeg) is loaded to replace the original background.
-        
-2.  **Segmentation Process**:
+*   The script uses contour detection to find irregularities, and if the area of a contour is significant, it marks the area as a possible anomaly.
     
-    *   The script uses MediaPipe's Selfie Segmentation model to detect and segment the person from the background.
-        
-3.  **Image Processing**:
+
+### 2\. **Hand Fracture Detection**
+
+*   The hand X-ray image is resized and blurred to reduce noise, and edges are detected using the **Canny edge detector**.
     
-    *   The background image is resized to match the dimensions of the person image.
-        
-    *   The segmentation mask is used to combine the person image and the background image based on the segmentation results.
-        
-4.  **Final Output**:
+*   The script identifies contours based on the edges and determines if the area and length of the contours suggest a possible fracture.
     
-    *   The person is placed in front of the new background.
-        
-    *   The result is displayed using OpenCV and saved to a file (output.jpg).
-        
+
+### 3\. **Display Results**
+
+*   The results for both detections are displayed in separate windows with annotations showing the detected anomalies or fractures.
+    
 
 Usage
 -----
 
-1.  Place your person image as person.jpeg and the new background image as background.jpeg in the project directory.
+1.  Place your X-ray images in the project directory:
     
+    *   brain.jpeg for the brain X-ray image.
+        
+    *   handfracture.jpeg for the hand X-ray image.
+        
 2.  Run the Python script:
     
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   bashCopy codepython background_replacement.py   `
+Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   bashCopy codepython healthcare_imaging_analysis.py   `
 
-1.  The program will display the final output in a new window and save it as output.jpg.
+1.  The program will display the following windows:
+    
+    *   **Brain Anomaly Detection**: Displays the brain image with possible anomalies highlighted.
+        
+    *   **Original Hand X-ray**: Displays the original hand X-ray image.
+        
+    *   **Edge Map**: Shows the edges detected in the hand X-ray.
+        
+    *   **Hand Fracture Detection**: Displays the hand X-ray with possible fractures highlighted.
+        
+2.  The terminal will output messages indicating whether anomalies or fractures were detected.
     
 
-Example
--------
+Example Output
+--------------
 
-Here is an example of how the output might look:
+### Brain Anomaly Detection:
+
+The detected anomalies are highlighted in red on the X-ray image.
+
+### Hand Fracture Detection:
+
+Fractures, if detected, are highlighted in red on the X-ray image with the detected areas outlined.
 
 License
 -------
 
 This project is open-source and available under the MIT License.
 
-Contributing
-------------
-
-Feel free to fork the repository, make changes, and submit pull requests. Contributions are always welcome!
-
 Acknowledgments
 ---------------
 
-*   MediaPipe for providing the powerful segmentation model.
+*   [OpenCV](https://opencv.org/) for image processing functions.
     
-*   [OpenCV](https://opencv.org/) for computer vision capabilities.
-    
-*   [NumPy](https://numpy.org/) for array manipulations.
+*   [NumPy](https://numpy.org/) for numerical operations.
